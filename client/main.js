@@ -25,9 +25,17 @@ Template.hello.onCreated(function helloOnCreated() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x999999);
 
+    var boxGeom = new THREE.SphereGeometry(10, 64, 64);
+    var boxMaterial = new THREE.MeshStandardMaterial({
+      color: 0xff0000,
+      flatShading: true
+    })
+    var box = new THREE.Mesh(boxGeom, boxMaterial);
+    // scene.add(box)
+
     geometry = new THREE.BoxGeometry(20, 20, 2, 32, 32, 32);
     geometrySphere = new THREE.SphereGeometry(10, 64, 64);
-    geometryPlane = new THREE.PlaneBufferGeometry(40, 40, 256, 256);
+    geometryPlane = new THREE.PlaneBufferGeometry(40, 40, 2560, 2560);
 
     albedo = new THREE.TextureLoader().load('albedo.png');
     ao = new THREE.TextureLoader().load('ao.png');
@@ -50,22 +58,23 @@ Template.hello.onCreated(function helloOnCreated() {
     // height = new THREE.TextureLoader().load('medieval-floor/height.png');
     // normal = new THREE.TextureLoader().load('medieval-floor/normal.png');
     // roughness = new THREE.TextureLoader().load('medieval-floor/roughness.png');
-    albedo = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_albedo.png');
-    ao = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_ao.png');
-    height = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_height.png');
-    normal = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_normal.png');
-    roughness = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_roughness.png');
+    // albedo = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_albedo.png');
+    // ao = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_ao.png');
+    // height = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_height.png');
+    // normal = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_normal.png');
+    // roughness = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_roughness.png');
 
-    materialFloor = new THREE.MeshStandardMaterial({
-      map: albedo,
-      normalMap: normal,
-      aoMap: ao,
-      roughnessMap: roughness,
-      displacementMap: height,
-      displacementScale: 1,
-      displacementBias: 0.5,
-      // wireframe: true
-    })
+    // materialFloor = new THREE.MeshStandardMaterial({
+    //   map: albedo,
+    //   normalMap: normal,
+    //   aoMap: ao,
+    //   roughnessMap: roughness,
+    //   displacementMap: height,
+    //   displacementScale: 3,
+    //   displacementBias: 1,
+    //   wireframe: false
+    // })
+
 
 
     albedo = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_albedo_tif.png');
@@ -79,16 +88,17 @@ Template.hello.onCreated(function helloOnCreated() {
       map: albedo,
       normalMap: normal,
       roughnessMap: roughness,
-      displacementMap: height,
-      displacementScale: 1,
-      displacementBias: 0.2,
+      flatShading: true
+      // displacementMap: height,
+      // displacementScale: 1,
+      // displacementBias: 0,
       // wireframe: true
     })
 
     spotLight = new THREE.SpotLight(0xffffff);
     spotLight.position.set(-20, 120, 120);
     spotLight.intensity = 0.5;
-    // spotLight.castShadow = true;
+    spotLight.castShadow = true;
     // spotLight.shadowCameraVisible = true;
 
     scene.add(spotLight);
