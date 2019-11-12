@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 import * as THREE from 'three'
+import GLTFLoader from 'three-gltf-loader';
 import OrbitControls from 'three-orbitcontrols'
 
 Template.hello.onCreated(function helloOnCreated() {
@@ -17,7 +18,7 @@ Template.hello.onCreated(function helloOnCreated() {
 
   function init() {
 
-    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
+    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 400);
     camera.position.z = 22;
 
 
@@ -27,7 +28,7 @@ Template.hello.onCreated(function helloOnCreated() {
     // geometry = new THREE.BoxGeometry(20, 20, 2, 32, 32, 32);
     // geometrySphere = new THREE.SphereGeometry(10, 64, 64);
     geometryPlane = new THREE.PlaneBufferGeometry(40, 40, 32, 32);
-    console.log("TCL: init -> geometryPlane", geometryPlane)
+    // console.log("TCL: init -> geometryPlane", geometryPlane)
 
     albedo = new THREE.TextureLoader().load('albedo.png');
     ao = new THREE.TextureLoader().load('ao.png');
@@ -65,6 +66,37 @@ Template.hello.onCreated(function helloOnCreated() {
 
     // mesh = new THREE.Mesh(geometry, material);
     // scene.add(mesh);
+
+    const loader = new GLTFLoader();
+    loader.load(
+      'height-test/height-test.gltf',
+      (gltf) => {
+        console.log("TCL: init -> gltf", gltf.scene.children[0])
+        const mesh = gltf.scene.children[0]
+        // called when the resource is loaded
+        scene.add(mesh);
+      },
+      (xhr) => {
+        // called while loading is progressing
+        console.log(`${(xhr.loaded / xhr.total * 100)}% loaded`);
+      },
+      (error) => {
+        // called when loading has errors
+        console.error('An error happened', error);
+      },
+    );
+    // var loader = new GLTFLoader();
+    // loader.load(
+    //   'height-test/height-test.gltf',
+    //   (gltf) => {
+    //     scene.add(gltf.scene);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+
+
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
