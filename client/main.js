@@ -64,34 +64,27 @@ Template.hello.onCreated(function helloOnCreated() {
     // normal = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_normal.png');
     // roughness = new THREE.TextureLoader().load('4k/TexturesCom_Pavement_Medieval_4K_roughness.png');
 
-    // materialFloor = new THREE.MeshStandardMaterial({
-    //   map: albedo,
-    //   normalMap: normal,
-    //   aoMap: ao,
-    //   roughnessMap: roughness,
-    //   displacementMap: height,
-    //   displacementScale: 3,
-    //   displacementBias: 1,
-    //   wireframe: false
-    // })
 
 
 
-    albedo = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_albedo_tif.png');
-
-    height = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_height.png');
-    normal = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_normal_tif.png');
-    roughness = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_roughness_tif.png');
-
+    // albedo = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_albedo_tif.png');
+    // height = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_height.png');
+    // normal = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_normal_tif.png');
+    // roughness = new THREE.TextureLoader().load('height-test/TexturesCom_Pavement_HerringboneNew_1K_roughness_tif.png');
+    albedo = new THREE.TextureLoader().load('cobble-stone/TexturesCom_Pavement_WaveCobblestone_1K_albedo.png');
+    ao = new THREE.TextureLoader().load('cobble-stone/TexturesCom_Pavement_WaveCobblestone_1K_ao.png');
+    height = new THREE.TextureLoader().load('cobble-stone/TexturesCom_Pavement_WaveCobblestone_1K_height.png');
+    normal = new THREE.TextureLoader().load('cobble-stone/TexturesCom_Pavement_WaveCobblestone_1K_normal.png');
+    roughness = new THREE.TextureLoader().load('cobble-stone/TexturesCom_Pavement_WaveCobblestone_1K_roughness.png');
 
     materialBricks = new THREE.MeshStandardMaterial({
       map: albedo,
+      aoMap: ao,
       normalMap: normal,
       roughnessMap: roughness,
-      flatShading: true
       // displacementMap: height,
-      // displacementScale: 1,
-      // displacementBias: 0,
+      // displacementScale: 9,
+      // displacementBias: 0.2,
       // wireframe: true
     })
 
